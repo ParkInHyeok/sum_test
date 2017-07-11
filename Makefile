@@ -1,12 +1,13 @@
 all: sum_test
 
-sum_test: main.o sum.o
-	g++ -o sum_test main.o sum.o
+sum_test: sum.o main.o
+	gcc -o sum_test sum.o main.o
 
-main.o : sum.b main.cpp
+sum.o: sum.c sum.h
+	gcc -c -o sum.o sum.c
 
-sum.o : sum.h sum.cpp
+main.o: main.c sum.h
+	gcc -c -o main.o main.c
 
-clean:
-	rm -f sum_test
-	rm -f *.o
+clean: 
+	rm *.o sum_test
